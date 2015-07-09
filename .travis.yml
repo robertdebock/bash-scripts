@@ -1,1 +1,3 @@
 language: bash
+script:
+    - bash template.sh
