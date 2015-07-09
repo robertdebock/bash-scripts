@@ -1,6 +1,6 @@
 language: bash
-before_install:
-  - sudo sudo apt-get install shellcheck
+before_script:
+  - sudo sudo apt-get install bashlint
 script:
-    - bash shellcheck template.sh
+    - bash bashlint template.sh
     - bash template.sh -o option -a argument
