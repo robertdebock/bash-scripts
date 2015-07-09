@@ -1,6 +1,3 @@
 language: bash
-before_script:
-  - sudo sudo apt-get install bashlint
 script:
-    - bash bashlint template.sh
     - bash template.sh -o option -a argument
