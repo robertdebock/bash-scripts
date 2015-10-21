@@ -60,6 +60,13 @@ setargs() {
   fi
 }
 
+checkvalues() {
+  if [ ! -f ${option} ] ; then
+   echo "$option is not a file."
+   usage
+  fi
+}
+
 main() {
   # Enter the functional part of the script here.
   :
@@ -68,4 +75,5 @@ main() {
 readargs "$@"
 checkargs
 setargs
+checkvalues
 main
