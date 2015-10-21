@@ -61,8 +61,8 @@ setargs() {
 }
 
 checkvalues() {
-  if [ ! -f ${option} ] ; then
-   echo "$option is not a file."
+  if [ "${option}" ! = "option" ] ; then
+   echo "$option is not set top \"option\"."
    usage
   fi
 }
