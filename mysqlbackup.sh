@@ -86,7 +86,7 @@ setargs() {
 }
 
 checkvalues() {
-  if [ ! -d "${backuplocation" ] ; then
+  if [ ! -d "${backuplocation}" ] ; then
     echo "${backuplocation} is not a directory."
   fi
 }
