@@ -80,7 +80,7 @@ setargs() {
   if [ ! "${username}" ] ; then
     username="root"
   fi
-  if [ ! "${backuolocation}" ] ; then
+  if [ ! "${backuplocation}" ] ; then
     backuplocation="/tmp"
   fi
 }
