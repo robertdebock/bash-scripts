@@ -94,7 +94,7 @@ checkvalues() {
 main() {
   mysql -u ${username} -p${password} -B -N -e "show databases;" | while read database ; do
     echo "Backing up mysql database for $database"
-    if [ "${compression" ] ; then
+    if [ "${compression}" ] ; then
       mysqldump -u ${username} -p${password} ${database} | gzip -dc > ${backuplocation}/mysql/${database}.mysql.gz 2> /dev/null
     else
       mysqldump -u ${username} -p${password} ${database} > ${backuplocation}/mysql/${database}.mysql 2> /dev/null
