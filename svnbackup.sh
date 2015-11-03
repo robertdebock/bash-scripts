@@ -7,9 +7,6 @@ usage() {
   echo
   echo "  -r REPOSITORY"
   echo "    The repository to backup, this is a path to the repository."
-  echo "  -R REVISIONS"
-  echo "    The amount of revisions to backup per file."
-  echo "    Default: 500" 
   echo "  -b BACKUPLOCATION"
   echo "    The location to store the backups to."
   echo "    Default: /tmp."
@@ -25,17 +22,6 @@ readargs() {
       -r)
         if [ "$2" ] ; then
           repository="$2"
-          shift ; shift
-        else
-          echo "Missing a value for $1."
-          echo
-          shift
-          usage
-        fi
-      ;;
-      -R)
-        if [ "$2" ] ; then
-          revisions="$2"
           shift ; shift
         else
           echo "Missing a value for $1."
@@ -72,14 +58,12 @@ readargs() {
 checkargs() {
   if [ ! "${repository}" ] ; then
     echo "Missing repository."
-    exit 2
+    echo
+    usage
   fi
 }
 
 setargs() {
-  if [ ! "${revisions}" ] ; then
-    revisions="500"
-  fi
   if [ ! "${backuplocation}" ] ; then
     backuplocation="/tmp"
   fi
@@ -88,6 +72,8 @@ setargs() {
 checkvalues() {
   if [ ! -d "${backuplocation}" ] ; then
     echo "${backuplocation} is not a directory."
+    echo
+    usage
   fi
 }
 
