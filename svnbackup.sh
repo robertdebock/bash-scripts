@@ -10,9 +10,10 @@ usage() {
   echo "  -b BACKUPLOCATION"
   echo "    The location to store the backups to."
   echo "    Default: /tmp."
-  echo "  -z"
-  echo "    Indicated compression (.zip) should be used."
-  echo "    Default: not set."
+  echo "  -a"
+  echo "    The amount of revisions to save in each block."
+  echo "    Default is 100."
+  echo ""
   exit 1
 }
 
@@ -41,8 +42,8 @@ readargs() {
           usage
         fi
       ;;
-      -z)
-        compression="yes"
+      -a)
+        amount="yes"
         shift
       ;;
       *)
@@ -78,11 +79,12 @@ checkvalues() {
 }
 
 main() {
-  if [ "${compression}" ] ; then
-    svnadmin dump ${repository} | zip ${backuplocation}/$(basename ${repository}).zip -
-  else
-    svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository})
-  fi
+  # Find the most recent revision.
+  currentrevision=$(svnlook youngest ${repository}
+  # Find the last (dumped) revision.
+  lastrevision=0
+  # Dump from the previousrevision until.
+  svnadmin dump ${repository} -r ${lastrevision}:${currentrevision} > ${backuplocation}/$(basename ${repository})-revs-${lastrevision}:${currentrevision}.dumpfile ${repository})
 }
 
 readargs "$@"
