@@ -79,9 +79,9 @@ checkvalues() {
 
 main() {
   if [ "${compression}" ] ; then
-    svnadmin dump ${repository} | zip ${backuplocation}/$(basename ${repository}).zip -
+    svnadmin dump ${repository} | zip ${backuplocation}/$(basename ${repository}).dump.zip -
   else
-    svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository})
+    svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository}).dump
   fi
 }
 
