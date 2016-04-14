@@ -72,7 +72,7 @@ readargs() {
 checkargs() {
   if [ ! "${password}" ] ; then
     echo "Missing password."
-    exit 2
+    usage
   fi
 }
 
@@ -88,16 +88,18 @@ setargs() {
 checkvalues() {
   if [ ! -d "${backuplocation}" ] ; then
     echo "${backuplocation} is not a directory."
+    exit 1
   fi
 }
 
 main() {
   mysql -u ${username} -p${password} -B -N -e "show databases;" | while read database ; do
     echo "Backing up mysql database for ${database}"
-    if [ "${compression}" ] ; then
-      mysqldump -u ${username} -p${password} ${database} | gzip -dc > ${backuplocation}/${database}.mysql.gz 2> /dev/null
+    prefix=`date +%Y%m%d_%H%M`
+   if [ "${compression}" ] ; then
+      mysqldump --extended-insert=FALSE -u ${username} -p${password} ${database} | sed '$ d' | gzip -9 > ${backuplocation}/${prefix}_${database}.mysql.gz 2> /dev/null
     else
-      mysqldump -u ${username} -p${password} ${database} > ${backuplocation}/${database}.mysql 2> /dev/null
+      mysqldump --extended-insert=FALSE -u ${username} -p${password} ${database} | sed '$ d' > ${backuplocation}/${prefix}_${database}.mysql 2> /dev/null
     fi
  done
 }

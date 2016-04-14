@@ -85,6 +85,11 @@ main() {
   lastrevision=0
   # Dump from the previousrevision until.
   svnadmin dump ${repository} -r ${lastrevision}:${currentrevision} > ${backuplocation}/$(basename ${repository})-revs-${lastrevision}:${currentrevision}.dumpfile ${repository})
+  if [ "${compression}" ] ; then
+    svnadmin dump ${repository} | zip ${backuplocation}/$(basename ${repository}).dump.zip -
+  else
+    svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository}).dump
+  fi
 }
 
 readargs "$@"
