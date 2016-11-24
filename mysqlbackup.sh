@@ -18,6 +18,8 @@ usage() {
   echo "  -c"
   echo "    Indicated compression (.gz) should be used."
   echo "    Default: not set."
+  echo "  -v"
+  echo "    Show timestamps when starting and stopping."
   exit 1
 }
 
@@ -61,6 +63,11 @@ readargs() {
         compression="yes"
         shift
       ;;
+      -c)
+        verbose="yes"
+        shift
+      ;;
+
       *)
         echo "Unknown option or argument $1."
         echo
@@ -108,6 +115,7 @@ checkvalues() {
 }
 
 main() {
+  if [ "${verbose}" ] ; then echo "Starting: $(date)" ; fi
   mysql -u ${username} -p${password} -B -N -e "show databases;" | while read database ; do
     echo "Backing up mysql database for ${database}"
     prefix=`date +%Y%m%d_%H%M`
@@ -117,6 +125,7 @@ main() {
       mysqldump --extended-insert=FALSE -u ${username} -p${password} ${database} | sed '$ d' > ${backuplocation}/${prefix}_${database}.mysql 2> /dev/null
     fi
  done
+ if [ "${verbose}" ] ; then echo "Finishing: $(date)" ; fi
 }
 
 readargs "$@"
