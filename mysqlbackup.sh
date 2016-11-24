@@ -8,8 +8,10 @@ usage() {
   echo "  -u USERNAME"
   echo "    The username to use for making the backup."
   echo "    Default: root."
+  echo "    Values in /etc/my.cnf are considered, using this option takes presedence."
   echo "  -p PASSWORD"
   echo "    The password to use in combination with the username to make the backup."
+  echo "    Values in /etc/my.cnf are considered, using this option takes presedence."
   echo "  -b BACKUPLOCATION"
   echo "    The location to store the backups to."
   echo "    Default: /tmp."
@@ -67,6 +69,19 @@ readargs() {
       ;;
     esac
   done
+}
+
+checkconf() {
+  if [ ! "${username}" ; then
+    if [ -f /etc/my.cnf ] ; then
+      username=$(grep '^user=' /etc/my.cnf | cut -d= -f2)
+    fi
+  fi
+  if [ ! "${password}" ; then
+    if [ -f /etc/my.cnf ] ; then
+      password=$(grep '^password=' /etc/my.cnf | cut -d= -f2)
+    fi
+  fi
 }
 
 checkargs() {
