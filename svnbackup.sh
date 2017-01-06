@@ -4,7 +4,7 @@
 
 usage() {
   echo "Usage: $0 -u username -p password"
-  echo
+  echo ""
   echo "  -r REPOSITORY"
   echo "    The repository to backup, this is a path to the repository."
   echo "  -b BACKUPLOCATION"
@@ -23,7 +23,7 @@ readargs() {
           shift ; shift
         else
           echo "Missing a value for $1."
-          echo
+          echo ""
           shift
           usage
         fi
@@ -34,14 +34,14 @@ readargs() {
           shift ; shift
         else
           echo "Missing a value for $1."
-          echo
+          echo ""
           shift
           usage
         fi
       ;;
       *)
         echo "Unknown option or argument $1."
-        echo
+        echo ""
         shift
         usage
       ;;
@@ -52,7 +52,7 @@ readargs() {
 checkargs() {
   if [ ! "${repository}" ] ; then
     echo "Missing repository."
-    echo
+    echo ""
     usage
   fi
 }
@@ -66,7 +66,7 @@ setargs() {
 checkvalues() {
   if [ ! -d "${backuplocation}" ] ; then
     echo "${backuplocation} is not a directory."
-    echo
+    echo ""
     usage
   fi
 }
@@ -75,7 +75,7 @@ main() {
   # Find the most recent revision.
   currentrevision=$(svnlook youngest "${repository}")
   # Find the last (dumped) revision.
-  lastrevision=0
+  lastrevision="0"
   # Dump from the previousrevision until.
   svnadmin dump "${repository}" -r "${lastrevision}":"${currentrevision}" > "${backuplocation}"/$(basename "${repository}")-revs-"${lastrevision}":"${currentrevision}".dumpfile "${repository}")
   svnadmin dump "${repository}" > "${backuplocation}"/$(basename "${repository}").dump
