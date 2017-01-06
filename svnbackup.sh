@@ -10,9 +10,6 @@ usage() {
   echo "  -b BACKUPLOCATION"
   echo "    The location to store the backups to."
   echo "    Default: /tmp."
-  echo "  -a"
-  echo "    The amount of revisions to save in each block."
-  echo "    Default is 100."
   echo ""
   exit 1
 }
@@ -41,10 +38,6 @@ readargs() {
           shift
           usage
         fi
-      ;;
-      -a)
-        amount="yes"
-        shift
       ;;
       *)
         echo "Unknown option or argument $1."
@@ -85,11 +78,7 @@ main() {
   lastrevision=0
   # Dump from the previousrevision until.
   svnadmin dump ${repository} -r ${lastrevision}:${currentrevision} > ${backuplocation}/$(basename ${repository})-revs-${lastrevision}:${currentrevision}.dumpfile ${repository})
-  if [ "${compression}" ] ; then
-    svnadmin dump ${repository} | zip ${backuplocation}/$(basename ${repository}).dump.zip -
-  else
-    svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository}).dump
-  fi
+  svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository}).dump
 }
 
 readargs "$@"
