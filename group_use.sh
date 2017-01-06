@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Script to set group use for a directory
 USER=tools
 GROUP=tools
