@@ -119,10 +119,10 @@ main() {
   mysql -u "${username}" -p"${password}" -B -N -e "show databases;" | while read -r database ; do
     echo "Backing up mysql database for ${database}"
     prefix=$(date +%Y%m%d_%H%M)
-   if [ "${compression}" ] ; then
+    if [ "${compression}" ] ; then
       mysqldump --extended-insert=FALSE -u "${username}" -p"${password}" "${database}" | sed '$ d' | gzip -9 > "${backuplocation}"/"${prefix}"_"${database}".mysql.gz 2> /dev/null
     else
-      mysqldump --extended-insert=FALSE -u "${username}" -p"${password}" "${database}" | sed '$ d' > "${backuplocation}"/${prefix}"_"${database}".mysql 2> /dev/null
+      mysqldump --extended-insert=FALSE -u "${username}" -p"${password}" "${database}" | sed '$ d' > "${backuplocation}"/"${prefix}"_"${database}".mysql 2> /dev/null
     fi
  done
  if [ "${verbose}" ] ; then echo "Finishing: $(date)" ; fi
