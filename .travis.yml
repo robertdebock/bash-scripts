@@ -7,5 +7,5 @@ services:
 
 
 script:
-    - for script in *.sh ; do docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/"${script}".sh ; done
+    - for script in *.sh ; do docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/"${script}" ; done
     - bash template.sh -o option -a argument
