@@ -73,12 +73,12 @@ checkvalues() {
 
 main() {
   # Find the most recent revision.
-  currentrevision=$(svnlook youngest ${repository}
+  currentrevision=$(svnlook youngest "${repository}")
   # Find the last (dumped) revision.
   lastrevision=0
   # Dump from the previousrevision until.
-  svnadmin dump ${repository} -r ${lastrevision}:${currentrevision} > ${backuplocation}/$(basename ${repository})-revs-${lastrevision}:${currentrevision}.dumpfile ${repository})
-  svnadmin dump ${repository} > ${backuplocation}/$(basename ${repository}).dump
+  svnadmin dump "${repository}" -r "${lastrevision}":"${currentrevision}" > "${backuplocation}"/$(basename "${repository}")-revs-"${lastrevision}":"${currentrevision}".dumpfile "${repository}")
+  svnadmin dump "${repository}" > "${backuplocation}"/$(basename "${repository}").dump
 }
 
 readargs "$@"
