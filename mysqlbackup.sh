@@ -84,7 +84,7 @@ checkconf() {
       username=$(grep '^user=' /etc/my.cnf | cut -d= -f2)
     fi
   fi
-  if [ ! "${password}" ; then
+  if [ ! "${password}" ] ; then
     if [ -f /etc/my.cnf ] ; then
       password=$(grep '^password=' /etc/my.cnf | cut -d= -f2)
     fi
