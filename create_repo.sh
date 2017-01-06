@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Script to create a SubVersion repository and set access rights.
 USER=svn
 GROUP=in4med
