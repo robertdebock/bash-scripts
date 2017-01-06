@@ -9,6 +9,8 @@ usage() {
   echo "    Description of this option."
   echo "  -a ARGUMENT"
   echo "    Description of this argument."
+  echo "  -s"
+  echo "    A switch."
   exit 1
 }
 
@@ -37,8 +39,12 @@ readargs() {
           usage
         fi
       ;;
+      -s)
+        switch="set"
+        shift
+      ;;
       *)
-        echo "Unknown option or argument $1."
+        echo "Unknown option, argument or switch: $1."
         echo
         shift
         usage
