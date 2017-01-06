@@ -74,6 +74,9 @@ checkvalues() {
 }
 
 main() {
+  if [ "${switch}" ] ; then
+    echo "Switch is set."
+  fi
   # Enter the functional part of the script here.
   :
 }
