@@ -77,7 +77,7 @@ main() {
   # Find the last (dumped) revision.
   lastrevision="0"
   # Dump from the previousrevision until.
-  svnadmin dump "${repository}" -r "${lastrevision}":"${currentrevision}" > "${backuplocation}"/$(basename "${repository}")-revs-"${lastrevision}":"${currentrevision}".dumpfile "${repository}")
+  svnadmin dump "${repository}" -r "${lastrevision}":"${currentrevision}" > "${backuplocation}"/$(basename "${repository}")-revs-"${lastrevision}":"${currentrevision}".dumpfile "${repository}"
   svnadmin dump "${repository}" > "${backuplocation}"/$(basename "${repository}").dump
 }
 
