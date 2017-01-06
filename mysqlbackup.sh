@@ -79,7 +79,7 @@ readargs() {
 }
 
 checkconf() {
-  if [ ! "${username}" ; then
+  if [ ! "${username}" ] ; then
     if [ -f /etc/my.cnf ] ; then
       username=$(grep '^user=' /etc/my.cnf | cut -d= -f2)
     fi
