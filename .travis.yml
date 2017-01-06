@@ -1,3 +1,11 @@
 language: bash
+
+sudo: required
+
+services:
+- docker
+
+
 script:
+    - for script in *.sh ; do docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/"${script}".sh ; done
     - bash template.sh -o option -a argument
