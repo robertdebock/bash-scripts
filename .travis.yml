@@ -7,6 +7,7 @@ services:
 
 
 script:
+    - docker run -v $(pwd):/app --workdir=/app coala/base coala --files="*.sh" --bears=ShellCheckBear --ci
+    - bash template.sh -o option -a argument
     - for script in *.sh ; do docker run -v $(pwd):/scripts koalaman/shellcheck /scripts/"${script}" ; echo "$?" >> exitstatus.txt ; done
     - exit $(sort -n exitstatus.txt | tail -n 1)
-    - bash template.sh -o option -a argument
