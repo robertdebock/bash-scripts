@@ -4,4 +4,4 @@
 
 Sample scripts in bash. Mostly for my own reference, but feel free to use or clone.
 
-Scripts are tested using [shelltest](https://hub.docker.com/r/koalaman/shellcheck/).
+Scripts are tested using [shelltest](https://hub.docker.com/r/koalaman/shellcheck/) and [coala](https://github.com/coala/coala).
