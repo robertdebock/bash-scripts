@@ -68,7 +68,7 @@ setargs() {
 
 checkvalues() {
   if [ "${option}" != "option" ] ; then
-   echo "$option is not set top \"option\"."
+   echo "$option is not set to \"option\"."
    usage
   fi
 }
