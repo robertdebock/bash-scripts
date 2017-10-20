@@ -63,7 +63,7 @@ readargs() {
         compression="yes"
         shift
       ;;
-      -c)
+      -v)
         verbose="yes"
         shift
       ;;
